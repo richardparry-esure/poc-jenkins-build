@@ -4,7 +4,7 @@ pipeline
 {
     agent any
     environment {
-        suites = """${sh(
+        cars = """${sh(
                 returnStdout: true,
                 script: 'ls -1 suites'
             )}""" 
@@ -13,11 +13,24 @@ pipeline
     parameters 
     {
       string(name: 'environment', defaultValue: 'devw', description: 'The namespace to deploy to')
-      choice(name: 'suite_name', choices: env.suites, description: 'Suite of services to deploy')
+      choice(name: 'suite_name', choices: ['abc','def'], description: 'Suite of services to deploy')
+      choice(name: 'make', choices: env.cars, description: 'Car make')
       choice(name: 'version', choices: ['latest','production'], description: 'version of the services to deploy')
    }
     stages
     {
+      stage ('output makes')
+      {
+        steps
+        {
+          echo "output makes"
+          script {
+            echo "makes - ${env.suites}"
+          }
+        } 
+      }
+    }
+
       stage ('List apps')
       {
         steps
