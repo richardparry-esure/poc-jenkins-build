@@ -1,7 +1,11 @@
 def getSuites() {
 
-    def cmd = [ 'sh', "ls -1 suites".toString()]
-    def result = cmd.execute()
+    File dir = new File(".")
+    result = new ArrayList()
+    dir.eachFile { f ->
+        println "${f} ${f.size()} ${new Date(f.lastModified())}"
+        result.add(f)
+    }
     return result
 }
 
