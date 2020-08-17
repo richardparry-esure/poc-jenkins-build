@@ -1,4 +1,9 @@
+def getSuites() {
 
+    def cmd = [ 'sh', "ls -1 suites".toString()]
+    def result = cmd.execute().text
+    return result
+}
 
 pipeline
 {
@@ -14,7 +19,7 @@ pipeline
     {
       string(name: 'environment', defaultValue: 'devw', description: 'The namespace to deploy to')
       choice(name: 'suite_name', choices: ['abc','def'], description: 'Suite of services to deploy')
-      choice(name: 'make', choices: env.cars, description: 'Car make')
+      choice(name: 'make', choices: getSuites(), description: 'Car make')
       choice(name: 'version', choices: ['latest','production'], description: 'version of the services to deploy')
    }
     stages
