@@ -1,7 +1,7 @@
 def getSuites() {
 
     def cmd = [ 'sh', "ls -1 suites".toString()]
-    def result = cmd.execute().text
+    def result = cmd.execute()
     return result
 }
 
