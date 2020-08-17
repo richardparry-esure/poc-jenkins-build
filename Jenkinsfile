@@ -29,7 +29,6 @@ pipeline
           }
         } 
       }
-    }
 
       stage ('List apps')
       {
